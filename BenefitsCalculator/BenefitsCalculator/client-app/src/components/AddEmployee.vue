@@ -1,22 +1,44 @@
 ﻿<template>
     <div id="emp-info" class="form-group">
         <label for="firstName">First Name</label>
-        <input class="form-control" id="firstName" placeholder="First Name">
+        <input v-model="firstName" class="form-control" id="firstName" placeholder="First Name">
         <label for="lastName">Last Name</label>
-        <input class="form-control" id="lastName" placeholder="Last Name">
+        <input v-model="lastName" class="form-control" id="lastName" placeholder="Last Name">
         <label for="empId">Employee Id</label>
-        <input class="form-control" id="empId" placeholder="Employee Id">
+        <input v-model="employeeId" class="form-control" id="empId" placeholder="Employee Id">
         <br />
-        <button type="button" class="btn btn-primary"> Add Employee </button>
+        <button type="button" class="btn btn-primary" v-on:click="addEmployee"> Add Employee </button>
     </div>
 </template>
 
-<script>export default {
+<script>
+import axios from 'axios';
+
+export default {
   name: 'AddEmployee',
   props: {
     msg: String
+  },
+  data: function () {
+    return {
+        firstName: "",
+        lastName: "",
+        employeeId: ""
+    }
+  },
+  methods: {
+      addEmployee: function () {
+        axios.post('https://localhost:5001/Employee/createemployee', {
+            firstName: this.firstName,
+            lastName: this.lastName,
+            employeeId: this.employeeId
+        })
+             
+      
+    }
   }
-}</script>
+}
+</script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>

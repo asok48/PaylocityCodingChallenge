@@ -1,0 +1,1 @@
+﻿import { axiosInsance, VueInstance } from '~/main'

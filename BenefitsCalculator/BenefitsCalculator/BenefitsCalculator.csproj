@@ -7,8 +7,14 @@
 
   <ItemGroup>
     <None Remove="Microsoft.AspNetCore.SpaServices.Extensions" />
+    <None Remove="client-app\src\js\" />
+    <None Remove="Models\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.16" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="client-app\src\js\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 </Project>

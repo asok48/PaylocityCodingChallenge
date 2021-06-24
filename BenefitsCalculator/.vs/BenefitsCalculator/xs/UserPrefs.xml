@@ -1,37 +1,26 @@
 ﻿<Properties StartupConfiguration="{4CC32BFE-636D-4F82-BC4B-1502F4286A2C}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="BenefitsCalculator/client-app/src/components/AddEmployee.vue">
+  <MonoDevelop.Ide.Workbench ActiveDocument="BenefitsCalculator/Controllers/EmployeeController.cs">
     <Files>
-      <File FileName="BenefitsCalculator/Startup.cs" Line="24" Column="53" />
-      <File FileName="BenefitsCalculator/Connection.cs" Line="13" Column="11" />
-      <File FileName="BenefitsCalculator/Program.cs" Line="1" Column="1" />
-      <File FileName="BenefitsCalculator/WeatherForecast.cs" Line="1" Column="1" />
-      <File FileName="BenefitsCalculator/Controllers/WeatherForecastController.cs" Line="1" Column="1" />
-      <File FileName="BenefitsCalculator/appsettings.json" Line="1" Column="1" />
-      <File FileName="BenefitsCalculator/appsettings.Development.json" Line="1" Column="1" />
-      <File FileName="BenefitsCalculator/Properties/launchSettings.json" Line="15" Column="21" />
-      <File FileName="BenefitsCalculator/client-app/public/index.html" Line="11" Column="15" />
-      <File FileName="BenefitsCalculator/client-app/src/components/HelloWorld.vue" Line="28" Column="14" />
-      <File FileName="BenefitsCalculator/client-app/.gitignore" Line="1" Column="1" />
-      <File FileName="BenefitsCalculator/client-app/src/App.vue" Line="49" Column="2" />
-      <File FileName="BenefitsCalculator/client-app/src/main.js" Line="13" Column="1" />
-      <File FileName="BenefitsCalculator/client-app/src/components/AddEmployee.vue" Line="32" Column="1" />
+      <File FileName="BenefitsCalculator/Startup.cs" Line="55" Column="1" />
+      <File FileName="BenefitsCalculator/Connection.cs" />
+      <File FileName="BenefitsCalculator/Program.cs" Line="16" Column="1" />
+      <File FileName="BenefitsCalculator/appsettings.json" />
+      <File FileName="BenefitsCalculator/appsettings.Development.json" />
+      <File FileName="BenefitsCalculator/Properties/launchSettings.json" />
+      <File FileName="BenefitsCalculator/client-app/public/index.html" />
+      <File FileName="BenefitsCalculator/client-app/.gitignore" />
+      <File FileName="BenefitsCalculator/client-app/src/App.vue" Line="16" Column="97" />
+      <File FileName="BenefitsCalculator/client-app/src/main.js" />
+      <File FileName="BenefitsCalculator/client-app/src/components/AddEmployee.vue" Line="34" Column="40" />
+      <File FileName="BenefitsCalculator/client-app/src/js/functions.js" />
+      <File FileName="BenefitsCalculator/Models/Employee.cs" Line="8" Column="33" />
+      <File FileName="BenefitsCalculator/client-app/src/components/ViewEmployees.vue" Line="1" Column="1" />
+      <File FileName="BenefitsCalculator/Controllers/EmployeeController.cs" Line="11" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="BenefitsCalculator" expanded="True">
-            <Node name="BenefitsCalculator" expanded="True">
-              <Node name="client-app" expanded="True">
-                <Node name="src" expanded="True">
-                  <Node name="components" expanded="True">
-                    <Node name="AddEmployee.vue" selected="True" />
-                  </Node>
-                </Node>
-              </Node>
-              <Node name="Controllers" expanded="True" />
-              <Node name="appsettings.json" expanded="True" />
-            </Node>
-          </Node>
+          <Node name="BenefitsCalculator" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
@@ -40,7 +29,9 @@
   <MonoDevelop.Ide.ItemProperties.BenefitsCalculator PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/alexsokol/git/PaylocityCodingChallenge/BenefitsCalculator/BenefitsCalculator/Controllers/EmployeeController.cs" relfile="BenefitsCalculator/Controllers/EmployeeController.cs" line="35" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>
