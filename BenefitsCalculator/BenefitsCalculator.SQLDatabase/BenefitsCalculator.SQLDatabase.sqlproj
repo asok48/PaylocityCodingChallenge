@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="Employee.sql" />
+    <Build Include="Dependent.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BenefitsCalculator.SQLDatabase.refactorlog" />

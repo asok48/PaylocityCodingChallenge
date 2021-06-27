@@ -13,7 +13,6 @@ using Microsoft.Extensions.Logging;
 using BenefitsCalculator.VueCoreConnection;
 using BenefitsCalculator.Data;
 using Microsoft.EntityFrameworkCore;
-using BenefitsCalculator.Data.Repositories;
 
 namespace BenefitsCalculator
 {
@@ -32,7 +31,7 @@ namespace BenefitsCalculator
             services.AddControllers();
             services.AddDbContext<BenefitsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<EmployeeRepository, EmployeeRepository>();
+            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             // connect vue app - middleware  
             services.AddSpaStaticFiles(options => options.RootPath = "client-app/dist");
         }

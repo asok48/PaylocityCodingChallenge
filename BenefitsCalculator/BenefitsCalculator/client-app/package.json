@@ -12,7 +12,11 @@
     "axios": "^0.21.1",
     "boostrap": "^2.0.0",
     "bootstrap": "^5.0.2",
+    "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
+    "datatables.net": "^1.10.25",
+    "datatables.net-dt": "^1.1.0",
+    "jquery": "^3.6.0",
     "vue": "^3.0.0"
   },
   "devDependencies": {
