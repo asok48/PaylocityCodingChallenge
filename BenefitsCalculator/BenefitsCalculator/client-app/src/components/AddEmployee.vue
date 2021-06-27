@@ -28,7 +28,7 @@ export default {
   },
   methods: {
       addEmployee: function () {
-        axios.post('https://localhost:5001/Employee/createemployee', {
+          axios.post('https://localhost:44360/Employee/createemployee', {
             firstName: this.firstName,
             lastName: this.lastName,
             employeeId: this.employeeId

@@ -17,7 +17,7 @@ namespace BenefitsCalculator.VueCoreConnection
 
         private static int Port { get; } = 8080;
         private static Uri DevelopmentServerEndpoint { get; } = new Uri($"http://localhost:{Port}");
-        private static TimeSpan Timeout { get; } = TimeSpan.FromSeconds(60);
+        private static TimeSpan Timeout { get; } = TimeSpan.FromSeconds(200);
 
         private static string DoneMessage { get; } = "DONE  Compiled successfully in";
 

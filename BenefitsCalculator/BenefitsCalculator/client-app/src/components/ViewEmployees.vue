@@ -3,11 +3,20 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'ViewEmployees',
   props: {
     msg: String
+  },
+  mounted: function(){
+      axios.get('https://localhost:44360/Employee/getemployees')
+          .then((response) => {
+              alert(JSON.stringify(response.data))
+          })
   }
+
 }
 </script>
 
