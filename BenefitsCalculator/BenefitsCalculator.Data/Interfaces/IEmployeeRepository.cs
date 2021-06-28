@@ -11,8 +11,5 @@ namespace BenefitsCalculator.Data
         public bool AddEmployee(Employee employee);
         public bool DeleteEmployee(Employee employee);
         public Employee EditEmployee(Employee employee);
-
-        public bool AddDependent(Dependent dependent);
-        public bool DeleteDependent(Dependent dependent);
     }
 }

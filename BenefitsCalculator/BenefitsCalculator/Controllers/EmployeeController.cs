@@ -67,27 +67,5 @@ namespace BenefitsCalculator.Controllers
             var res = employeeRepository.EditEmployee(employee);
             return Ok(res);
         }
-
-        [HttpPost]
-        [Route("adddependent")]
-        public IActionResult CreateDependent(Dependent dependent)
-        {
-            if (!employeeRepository.AddDependent(dependent))
-            {
-                return BadRequest("Error adding dependent");
-            }
-            return Ok(dependent);
-        }
-
-        [HttpPost]
-        [Route("deletedependent")]
-        public IActionResult DeleteDependent(Dependent dependent)
-        {
-            if (!employeeRepository.DeleteDependent(dependent))
-            {
-                return BadRequest("Error deleting dependent");
-            }
-            return Ok(dependent);
-        }
     }
 }

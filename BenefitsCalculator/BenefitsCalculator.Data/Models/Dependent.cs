@@ -11,7 +11,7 @@ namespace BenefitsCalculator.Data
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmployeeId { get; set; }
-        public int Cost { get; set; }
+        public double Cost { get; set; }
 
     }
 }

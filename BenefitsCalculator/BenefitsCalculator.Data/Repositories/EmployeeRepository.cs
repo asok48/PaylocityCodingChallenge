@@ -29,7 +29,7 @@ namespace BenefitsCalculator.Data
                 return false;
             }
 
-            employee.Cost = employee.FirstName.ToLower().StartsWith("a") ? EMPLOYEE_COST * DISCOUNT : EMPLOYEE_COST
+            employee.Cost = employee.FirstName.ToLower().StartsWith("a") ? EMPLOYEE_COST * DISCOUNT : EMPLOYEE_COST;
             context.Employees.Add(employee);
             context.SaveChanges();
             return true;
@@ -71,28 +71,6 @@ namespace BenefitsCalculator.Data
             context.Update(dbEmployee);
             return dbEmployee;
         }
-
-        public bool AddDependent(Dependent dependent)
-        {
-            if (context.Employees.Count(x => x.EmployeeId == dependent.EmployeeId) == 0)
-            {
-                return false;
-            }
-            context.Dependents.Add(dependent);
-            context.SaveChanges();
-            return true;
-        }
-
-        public bool DeleteDependent(Dependent dependent) {
-            if (context.Employees.Count(x => x.EmployeeId == dependent.EmployeeId) == 0)
-            {
-                return false;
-            }
-            context.Dependents.Remove(dependent);
-            context.SaveChanges();
-            return true;
-        }
-
         public bool DeleteEmployee(Employee employee)
         {
             var dbEmployee = context.Employees.AsNoTracking().SingleOrDefault(x => x.EmployeeId == employee.EmployeeId);

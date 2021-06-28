@@ -79,7 +79,7 @@ export default {
     },
     addDependent: function() {
         let vm = this
-        axios.post('https://localhost:44360/Employee/adddependent', {
+        axios.post('https://localhost:44360/Dependent/adddependent', {
             firstName: this.firstNameD,
             lastName: this.lastNameD,
             employeeId: this.employeeId
@@ -96,7 +96,7 @@ export default {
     deleteDependent: function(dependent) {
         let vm = this
         let dep = dependent
-        axios.post('https://localhost:44360/Employee/deletedependent', {
+        axios.post('https://localhost:44360/Dependent/deletedependent', {
             employeeId: this.employeeId,
             id: dependent.id
         }).then((response) => {
