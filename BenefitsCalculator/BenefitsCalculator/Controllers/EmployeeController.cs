@@ -28,6 +28,27 @@ namespace BenefitsCalculator.Controllers
             return Ok(employeeRepository.GetEmployees());
         }
 
+        [HttpGet]
+        [Route("filteremployees")]
+        public IActionResult GetFiltered(string id, string firstName, string lastName)
+        {
+
+            return Ok(employeeRepository.GetFilteredEmployees(id, firstName, lastName));
+        }
+
+        [HttpPost]
+        [Route("deleteemployee")]
+        public IActionResult DeleteEmployee(Employee employee)
+        {
+            if (!employeeRepository.DeleteEmployee(employee))
+            {
+                return BadRequest("Error deleting employee record.");
+            } else
+            {
+                return Ok();
+            }
+        }
+
         [HttpPost]
         [Route("createemployee")]
         public IActionResult CreateEmployee(Employee employee)
@@ -37,6 +58,14 @@ namespace BenefitsCalculator.Controllers
                 return BadRequest("Employee Id aleady in use");
             }
             return Ok();
+        }
+
+        [HttpPut]
+        [Route("editemployee")]
+        public IActionResult EditEmployee(Employee employee)
+        {
+            var res = employeeRepository.EditEmployee(employee);
+            return Ok(res);
         }
 
         [HttpPost]

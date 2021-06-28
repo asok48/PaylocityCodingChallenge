@@ -7,7 +7,11 @@ namespace BenefitsCalculator.Data
     public interface IEmployeeRepository
     {
         public IEnumerable<Employee> GetEmployees();
+        public IEnumerable<Employee> GetFilteredEmployees(string id, string firstName, string LastName);
         public bool AddEmployee(Employee employee);
+        public bool DeleteEmployee(Employee employee);
+        public Employee EditEmployee(Employee employee);
+
         public bool AddDependent(Dependent dependent);
         public bool DeleteDependent(Dependent dependent);
     }

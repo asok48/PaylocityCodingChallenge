@@ -31,7 +31,7 @@ namespace BenefitsCalculator
             services.AddControllers();
             services.AddDbContext<BenefitsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             // connect vue app - middleware  
             services.AddSpaStaticFiles(options => options.RootPath = "client-app/dist");
         }

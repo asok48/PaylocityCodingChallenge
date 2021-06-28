@@ -43,10 +43,9 @@
 
 <script>
 import axios from 'axios';
-import VModal from 'vue-js-modal'
 
 export default {
-  name: 'AddEmployee',
+  name: 'EditEmployee',
   props: {
     msg: String
   },
