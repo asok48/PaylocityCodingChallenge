@@ -8,8 +8,8 @@ namespace BenefitsCalculator.Data
     public class DependentRepository : IDependentRepository
     {
         private BenefitsContext context;
-        private const int DEPENDENT_COST = 500;
-        private const double DISCOUNT = 0.9;
+        private const decimal DEPENDENT_COST = 500;
+        private const decimal DISCOUNT = 0.9m;
 
         public DependentRepository(BenefitsContext _context)
         {
@@ -27,6 +27,11 @@ namespace BenefitsCalculator.Data
             context.Dependents.Add(dependent);
             context.SaveChanges();
             return true;
+        }
+
+        public IEnumerable<Dependent> GetDependents(string employeeId)
+        {
+            return context.Dependents.Where(x => x.EmployeeId == employeeId).ToList();
         }
 
         public bool DeleteDependent(Dependent dependent)

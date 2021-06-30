@@ -9,8 +9,8 @@ namespace BenefitsCalculator.Data
     public class EmployeeRepository : IEmployeeRepository
     {
         private BenefitsContext context;
-        private const int EMPLOYEE_COST = 1000;
-        private const double DISCOUNT = 0.9;
+        private const decimal EMPLOYEE_COST = 1000;
+        private const decimal DISCOUNT = 0.9m;
 
         public EmployeeRepository(BenefitsContext _context)
         {

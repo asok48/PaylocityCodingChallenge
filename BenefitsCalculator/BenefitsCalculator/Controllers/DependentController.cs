@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace BenefitsCalculator.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class DependentController : ControllerBase
     {
         private readonly ILogger<DependentController> _logger;
@@ -28,6 +30,17 @@ namespace BenefitsCalculator.Controllers
                 return BadRequest("Error adding dependent");
             }
             return Ok(dependent);
+        }
+
+        [HttpGet]
+        [Route("getdependents")]
+        public IActionResult GetDependents(string employeeId)
+        {
+            if (string.IsNullOrEmpty(employeeId))
+            {
+                return BadRequest("Invalid employee Id");
+            }
+            return Ok(dependentRepository.GetDependents(employeeId));
         }
 
         [HttpPost]

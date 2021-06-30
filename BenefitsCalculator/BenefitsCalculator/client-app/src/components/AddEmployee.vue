@@ -11,33 +11,41 @@
     </div>
 
     <div v-if="showDependents == true">
-        <h3> {{ firstName }} {{ lastName }}'s dependents: </h3>
-        <div id="emp-info" class="form-group">
-            <label for="firstNameD">First Name</label>
-            <input v-model="firstNameD" class="form-control" id="firstNameD" placeholder="First Name">
-            <label for="lastNameD">Last Name</label>
-            <input v-model="lastNameD" class="form-control" id="lastNameD" placeholder="Last Name">
-            <br />
-            <button type="button" class="btn btn-primary" v-on:click="addDependent"> Add Dependent </button>
-        </div>
-
-        <table class="table table-striped">
+        <h3> Add {{ firstName }} {{ lastName }}'s Dependents: </h3>
+        <table id="view-display" class="table table-striped shadow p-3 mb-5 bg-white rounded">
             <thead>
                 <tr>
-                    <th scope="col">First Name </th>
+                    <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="d in dependents">
-                    <td scope="row">{{ d.firstName }}</td>
-                    <td>{{ d.lastName }}</td>
+                    <td scope="row">
+                        <input v-model="d.firstName" class="form-control" placeholder="First Name" />
+                    </td>
                     <td>
-                        <button type="button" class="btn btn-primary" v-on:click="deleteDependent(d)">Delete</button>
+                        <input v-model="d.lastName" class="form-control" placeholder="Last Name" />
+                    </td>
+                    <td>
+                        <button type="button" id="view-emp" class="btn btn-danger" v-on:click="deleteDependent(d)">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row">
+                        <input v-model="firstNameD" class="form-control" placeholder="First Name" />
+                    </td>
+                    <td>
+                        <input v-model="lastNameD" class="form-control" placeholder="Last Name" />
+                    </td>
+                    <td>
+                        <button type="button" id="view-emp" class="btn btn-primary" v-on:click="addDependent">Add</button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <button type="button" id="view-emp" class="btn btn-primary" v-on:click="complete">Complete</button>
     </div>
 </template>
 
@@ -106,6 +114,15 @@ export default {
         .catch((error) => {
             alert("Error deleting dependent.")
         })
+    },
+    complete: function() {
+        this.firstName = ""
+        this.lastName = ""
+        this.employeeId = ""
+        this.showDependents = false
+        this.dependents = []
+        this.firstNameD = ""
+        this.lastNameD = ""
     }
   }
 }
