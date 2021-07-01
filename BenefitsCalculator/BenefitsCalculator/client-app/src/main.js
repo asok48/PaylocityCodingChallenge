@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+var config = require('../vue.config.js');
+
 
 import 'bootstrap/dist/css/bootstrap.css'
 

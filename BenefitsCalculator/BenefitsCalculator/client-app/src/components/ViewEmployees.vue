@@ -2,21 +2,21 @@
     <div id="emp-filter" class="form-group shadow p-3 mb-5 bg-white rounded">
         <input v-model="filter.firstName" class="form-control filter-input" placeholder="First Name" />
         <input v-model="filter.lastName" class="form-control filter-input" placeholder="Last Name" />
-        <input v-model="filter.id" class="form-control filter-input" placeholder="Employee Id" />
+        <input v-model="filter.id" class="form-control filter-input" placeholder="Employee ID" />
         <button type="button" class="btn btn-primary filter-btn" v-on:click="filterEmployees"> Apply Filters </button>
         <button type="button" class="btn btn-primary filter-btn" v-on:click="clearFilters"> Clear Filters </button>
     </div>
     <table id="table_yo" class="table table-striped shadow p-3 mb-5 bg-white rounded">
         <thead>
             <tr>
-                <th scope="col">Employee Id</th>
+                <th scope="col">Employee ID</th>
                 <th scope="col">First</th>
                 <th scope="col">Last</th>
                 <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="e in employees">
+            <tr v-for="e in employees" v-bind:key="e.employeeId">
                 <td scope="row">{{ e.employeeId }}</td>
                 <td>{{ e.firstName }}</td>
                 <td>{{ e.lastName }}</td>
@@ -33,7 +33,7 @@
         <table id="view-display" class="table table-striped shadow p-3 mb-5 bg-white rounded">
             <thead>
                 <tr>
-                    <th scope="col">Employee Id</th>
+                    <th scope="col">Employee ID</th>
                     <th scope="col">First</th>
                     <th scope="col">Last</th>
                     <th scope="col">Benefits Cost</th>
@@ -58,7 +58,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="d in currentEmployee.dependents">
+                <tr v-for="d in currentEmployee.dependents" v-bind:key="d.id">
                     <td scope="row">{{ d.firstName }}</td>
                     <td>{{ d.lastName }}</td>
                     <td>${{ d.cost }}</td>
@@ -89,7 +89,7 @@
         <table id="view-display" class="table table-striped shadow p-3 mb-5 bg-white rounded">
             <thead>
                 <tr>
-                    <th scope="col">Employee Id</th>
+                    <th scope="col">Employee ID</th>
                     <th scope="col">First</th>
                     <th scope="col">Last</th>
                     <th scope="col"></th>
@@ -98,7 +98,7 @@
             <tbody>
                 <tr>
                     <td scope="row">
-                        <input v-model="currentEmployee.employee.employeeId" class="form-control" placeholder="Employee Id" />
+                        <input v-model="currentEmployee.employee.employeeId" class="form-control" placeholder="Employee ID" />
                     </td>
                     <td>
                         <input v-model="currentEmployee.employee.firstName" class="form-control" placeholder="First Name" />
@@ -123,7 +123,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="d in currentEmployee.dependents">
+                <tr v-for="d in currentEmployee.dependents" v-bind:key="d.id">
                     <td scope="row">
                         <input v-model="d.firstName" class="form-control" placeholder="First Name" />
                     </td>
@@ -152,8 +152,7 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
+    import * as functions from '../js/functions.js'
     export default {
 
         name: 'ViewEmployees',
@@ -189,27 +188,15 @@
         },
         methods: {
             filterEmployees: function () {
-            let vm = this
-                axios.get('https://localhost:44360/Employee/filteremployees', {
-                    params: {
-                        firstName: this.filter.firstName,
-                        lastName: this.filter.lastName,
-                        id: this.filter.id
-                    }
-                })
-                .then((response) => {
-                    vm.employees = response.data
-                    vm.currentEmployee.employee = null
-                    vm.currentEmployee.dependents = null
-                    vm.viewingEmployee = false
-                    vm.totalCost = null
-                })
-            },
-            getEmployees: function () {
                 let vm = this
-                axios.get('https://localhost:44360/Employee/getemployees')
-                    .then((response) => {
-                        vm.employees = response.data
+                functions.filterEmployees(this.filter.firstName, this.filter.lastName, this.filter.id)
+                    .then((res) => {
+                        vm.employees = res.data
+                        vm.currentEmployee.employee = null
+                        vm.currentEmployee.dependents = null
+                        vm.viewingEmployee = false
+                        vm.editing = false
+                        vm.totalCost = null
                     })
             },
             clearFilters: function () {
@@ -221,11 +208,7 @@
             viewEmployee: function (employee, type) {
                 this.currentEmployee.employee = employee
                 let vm = this
-                axios.get('https://localhost:44360/Dependent/getdependents', {
-                    params: {
-                        employeeId: employee.employeeId
-                    }
-                })
+                functions.getDependents(employee)
                 .then((response) => {
                     vm.currentEmployee.dependents = response.data
                     if (response.data.length == 0) {
@@ -250,51 +233,40 @@
             deleteEmployee: function (employee) {
                 let vm = this
                 //Add confirmation
-                axios.post('https://localhost:44360/Employee/deleteemployee', {
-                    firstName: employee.firstName,
-                    lastName: employee.lastName,
-                    employeeId: employee.employeeId
-                }).then((response) => {
+                functions.deleteEmployee(employee)
+                .then(() => {
                     alert("Employee Deleted!")
                     vm.filterEmployees()
                 })
-                .catch((error) => {
+                .catch(() => {
                     alert("Error deleting employee")
                 })
             },
             addDependent: function () {
                 let vm = this
-                axios.post('https://localhost:44360/Dependent/adddependent', {
-                    firstName: this.newDependent.firstName,
-                    lastName: this.newDependent.lastName,
-                    employeeId: this.currentEmployee.employee.employeeId
-                }).then((response) => {
+                functions.addDependent(this.newDependent.firstName, this.newDependent.lastName, this.currentEmployee.employee.employeeId)
+                .then((response) => {
                     alert("Dependent Added!")
                     vm.newDependent.firstName = ""
                     vm.newDependent.lastName = ""
                     vm.currentEmployee.dependents.push(response.data)
                 })
-                    .catch((error) => {
-                        alert("Error adding dependent.")
-                    })
+                .catch(() => {
+                    alert("Error adding dependent.")
+                })
             },
             deleteDependent: function (dependent) {
                 let vm = this
-                let dep = dependent
-                axios.post('https://localhost:44360/Dependent/deletedependent', {
-                    employeeId: this.currentEmployee.employee.employeeId,
-                    id: dependent.id
-                }).then((response) => {
+                functions.deleteDependent(this.currentEmployee.employee.employeeId, dependent.id)
+                .then(() => {
                     alert("Dependent Deleted!")
-                    vm.currentEmployee.dependents = vm.currentEmployee.dependents.filter(function (d) { return d.id != dep.id });
+                    vm.currentEmployee.dependents = vm.currentEmployee.dependents.filter(function (d) { return d.id != dependent.id });
                 })
-                    .catch((error) => {
-                        alert("Error deleting dependent.")
-                    })
+                .catch((error) => {
+                    alert("Error deleting dependent.")
+                })
             }
         }
-
-
     }
 </script>
 

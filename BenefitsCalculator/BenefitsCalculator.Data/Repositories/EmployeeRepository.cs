@@ -54,11 +54,6 @@ namespace BenefitsCalculator.Data
         }
         public Employee EditEmployee(Employee employee)
         {
-            if (context.Employees.Count(x => x.EmployeeId == employee.EmployeeId) == 0)
-            {
-                return null;
-            }
-
             var dbEmployee = context.Employees.FirstOrDefault(x => x.EmployeeId == employee.EmployeeId);
             if (dbEmployee == null)
             {

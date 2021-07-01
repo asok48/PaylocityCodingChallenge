@@ -1,11 +1,11 @@
 ﻿<template>
-    <div id="emp-info" class="form-group" v-if="showDependents == false">
+    <div id="emp-info" class="form-group shadow p-3 mb-5 bg-white rounded" v-if="showDependents == false">
         <label for="firstName">First Name</label>
         <input v-model="firstName" class="form-control" id="firstName" placeholder="First Name">
         <label for="lastName">Last Name</label>
         <input v-model="lastName" class="form-control" id="lastName" placeholder="Last Name">
         <label for="empId">Employee Id</label>
-        <input v-model="employeeId" class="form-control" id="empId" placeholder="Employee Id">
+        <input v-model="employeeId" class="form-control" id="empId" placeholder="Employee ID">
         <br />
         <button type="button" class="btn btn-primary" v-on:click="addEmployee"> Add Employee </button>
     </div>
@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="d in dependents">
+                <tr v-for="d in dependents" v-bind:key="d.id">
                     <td scope="row">
                         <input v-model="d.firstName" class="form-control" placeholder="First Name" />
                     </td>
@@ -50,8 +50,7 @@
 </template>
 
 <script>
-import axios from 'axios';
-import VModal from 'vue-js-modal'
+import * as functions from '../js/functions.js'
 
 export default {
   name: 'AddEmployee',
@@ -73,45 +72,37 @@ export default {
   methods: {
       addEmployee: function () {
           let vm = this
-          axios.post('https://localhost:44360/Employee/createemployee', {
-            firstName: this.firstName,
-            lastName: this.lastName,
-            employeeId: this.employeeId
-          }).then((response) => {
+          functions.addEmployee(this.firstName, this.lastName, this.employeeId)
+          .then(() => {
               alert("Employee Added!")
               vm.showDependents = true
           })
-          .catch((error) => {
+          .catch(() => {
               alert("Error adding employee. Ensure that the employee Id is not already in use.")
           })
     },
     addDependent: function() {
         let vm = this
-        axios.post('https://localhost:44360/Dependent/adddependent', {
-            firstName: this.firstNameD,
-            lastName: this.lastNameD,
-            employeeId: this.employeeId
-          }).then((response) => {
-              alert("Dependent Added!")
-              vm.firstNameD = ""
-              vm.lastNameD = ""
-              vm.dependents.push(response.data)
-          })
-          .catch((error) => {
+        functions.addDependent(this.firstNameD, this.lastNameD, this.employeeId)
+        .then((response) => {
+            alert("Dependent Added!")
+            vm.firstNameD = ""
+            vm.lastNameD = ""
+            vm.dependents.push(response.data)
+        })
+        .catch(() => {
               alert("Error adding dependent.")
-          })
+        })
     },
     deleteDependent: function(dependent) {
         let vm = this
         let dep = dependent
-        axios.post('https://localhost:44360/Dependent/deletedependent', {
-            employeeId: this.employeeId,
-            id: dependent.id
-        }).then((response) => {
+        functions.deleteDependent(this.employeeId, dependent.id)
+        .then(() => {
             alert("Dependent Deleted!")
             vm.dependents = vm.dependents.filter(function (d) { return d.id != dep.id });
         })
-        .catch((error) => {
+        .catch(() => {
             alert("Error deleting dependent.")
         })
     },

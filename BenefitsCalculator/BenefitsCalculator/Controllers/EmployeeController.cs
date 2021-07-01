@@ -24,7 +24,6 @@ namespace BenefitsCalculator.Controllers
         [Route("getemployees")]
         public IActionResult Get()
         {
-
             return Ok(employeeRepository.GetEmployees());
         }
 
@@ -53,6 +52,14 @@ namespace BenefitsCalculator.Controllers
         [Route("createemployee")]
         public IActionResult CreateEmployee(Employee employee)
         {
+            if (employee.EmployeeId == null)
+            {
+                return BadRequest("Please enter a valid Employee Id.");
+            }
+            if (string.IsNullOrEmpty(employee.FirstName) || string.IsNullOrEmpty(employee.LastName))
+            {
+                return BadRequest("Employee first and last name must contain value.");
+            }
             if (!employeeRepository.AddEmployee(employee))
             {
                 return BadRequest("Employee Id aleady in use");
