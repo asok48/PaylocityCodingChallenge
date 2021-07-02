@@ -1,8 +1,8 @@
 <template>
     <div id="emp-filter" class="form-group shadow p-3 mb-5 bg-white rounded">
-        <input v-model="filter.firstName" class="form-control filter-input" placeholder="First Name" />
-        <input v-model="filter.lastName" class="form-control filter-input" placeholder="Last Name" />
-        <input v-model="filter.id" class="form-control filter-input" placeholder="Employee ID" />
+        <input v-model="filter.firstName" class="filter-input" placeholder="First Name" />
+        <input v-model="filter.lastName" class="filter-input" placeholder="Last Name" />
+        <input v-model="filter.id" class="filter-input" placeholder="Employee ID" />
         <button type="button" class="btn btn-primary filter-btn" v-on:click="filterEmployees"> Apply Filters </button>
         <button type="button" class="btn btn-primary filter-btn" v-on:click="clearFilters"> Clear Filters </button>
     </div>
@@ -309,59 +309,3 @@
         }
     }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-    h3 {
-        margin: 40px 0 0;
-    }
-
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
-
-    li {
-        display: inline-block;
-        margin: 0 10px;
-    }
-
-    a {
-        color: #42b983;
-    }
-    #view-display tbody tr td {
-        width: 25%;
-    }
-    .filter-input {
-        float: left;
-        width: 20%;
-        margin-right: 1%;
-        margin-left: 1%;
-    }
-
-    .filter-btn {
-        margin-right: 1%;
-        margin-left: 1%;
-    }
-
-    .table {
-        width: 90%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .viewing {
-        display: inline-block;
-    }
-
-    .viewing input {
-        float: left;
-        width: 20%;
-        margin-right: 1%;
-        margin-left: 1%;
-    }
-
-    #view-emp {
-        margin-right: 1%;
-        margin-left: 1%;
-    }
-</style>

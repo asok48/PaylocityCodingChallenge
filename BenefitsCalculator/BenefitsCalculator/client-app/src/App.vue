@@ -6,9 +6,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" @click="component = 'ViewEmployees'">View Employees</a>
                 </li>
@@ -22,9 +19,13 @@
 
 </template>
 
+<style>
+    @import './assets/styling.css';
+</style>
+
 <script>
-    import ViewEmployees from './components/ViewEmployees.vue'
-    import AddEmployee from './components/AddEmployee'
+import ViewEmployees from './components/ViewEmployees.vue'
+import AddEmployee from './components/AddEmployee'
 
 export default {
   name: 'App',
@@ -39,20 +40,3 @@ export default {
   },
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-.navbar {
-  overflow: hidden;
-  background-color: #333;
-  position: fixed; /* Set the navbar to fixed position */
-  top: 0; /* Position the navbar at the top of the page */
-  width: 100%; /* Full width */
-}
-</style>
