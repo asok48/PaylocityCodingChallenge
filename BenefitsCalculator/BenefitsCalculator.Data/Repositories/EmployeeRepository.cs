@@ -35,8 +35,11 @@ namespace BenefitsCalculator.Data
             }
 
             employee.Cost = employee.FirstName.ToLower().StartsWith("a") ? EMPLOYEE_COST * DISCOUNT : EMPLOYEE_COST;
+            employee.CreatedDate = DateTime.Now;
             context.Employees.Add(employee);
+
             context.SaveChanges();
+
             return true;
         }
 
@@ -82,6 +85,7 @@ namespace BenefitsCalculator.Data
             dbEmployee.FirstName = string.IsNullOrEmpty(employee.FirstName) ? dbEmployee.FirstName : employee.FirstName;
             dbEmployee.LastName = string.IsNullOrEmpty(employee.LastName) ? dbEmployee.LastName : employee.LastName;
             dbEmployee.Cost = dbEmployee.FirstName.ToLower().StartsWith("a") ? EMPLOYEE_COST * DISCOUNT : EMPLOYEE_COST;
+            dbEmployee.ModifiedDate = DateTime.Now;
 
             try
             {

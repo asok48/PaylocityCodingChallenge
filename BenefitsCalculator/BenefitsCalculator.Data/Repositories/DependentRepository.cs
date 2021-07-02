@@ -23,6 +23,8 @@ namespace BenefitsCalculator.Data
             }
 
             dependent.Cost = dependent.FirstName.ToLower().StartsWith("a") ? DEPENDENT_COST * DISCOUNT : DEPENDENT_COST;
+            dependent.CreatedDate = DateTime.Now;
+
             try
             {
                 context.Dependents.Add(dependent);
@@ -69,6 +71,7 @@ namespace BenefitsCalculator.Data
             dbDependent.FirstName = string.IsNullOrEmpty(dependent.FirstName) ? dbDependent.FirstName : dependent.FirstName;
             dbDependent.LastName = string.IsNullOrEmpty(dependent.LastName) ? dbDependent.LastName : dependent.LastName;
             dbDependent.Cost = dbDependent.FirstName.ToLower().StartsWith("a") ? DEPENDENT_COST * DISCOUNT : DEPENDENT_COST;
+            dbDependent.ModifiedDate = DateTime.Now;
 
             try
             {
