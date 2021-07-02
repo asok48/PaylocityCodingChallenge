@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace BenefitsCalculator.Data
 {
@@ -24,8 +23,14 @@ namespace BenefitsCalculator.Data
             }
 
             dependent.Cost = dependent.FirstName.ToLower().StartsWith("a") ? DEPENDENT_COST * DISCOUNT : DEPENDENT_COST;
-            context.Dependents.Add(dependent);
-            context.SaveChanges();
+            try
+            {
+                context.Dependents.Add(dependent);
+                context.SaveChanges();
+            } catch (Exception ex)
+            {
+                return false;
+            }
             return true;
         }
 
@@ -40,9 +45,41 @@ namespace BenefitsCalculator.Data
             {
                 return false;
             }
-            context.Dependents.Remove(dependent);
-            context.SaveChanges();
+            try
+            {
+                context.Dependents.Remove(dependent);
+                context.SaveChanges();
+            } catch (Exception ex)
+            {
+                //Should ideally log expections instead of swallowing them
+                return false;
+            }
             return true;
+        }
+
+        public bool UpdateDependent(Dependent dependent)
+        {
+            var dbDependent = context.Dependents.FirstOrDefault(x => x.Id == dependent.Id);
+
+            if (dbDependent == null)
+            {
+                return false;
+            }
+
+            dbDependent.FirstName = string.IsNullOrEmpty(dependent.FirstName) ? dbDependent.FirstName : dependent.FirstName;
+            dbDependent.LastName = string.IsNullOrEmpty(dependent.LastName) ? dbDependent.LastName : dependent.LastName;
+            dbDependent.Cost = dbDependent.FirstName.ToLower().StartsWith("a") ? DEPENDENT_COST * DISCOUNT : DEPENDENT_COST;
+
+            try
+            {
+                context.Dependents.Update(dbDependent);
+                context.SaveChanges();
+            } catch (Exception ex)
+            {
+                return false;
+            }
+            return true;
+
         }
 
     }

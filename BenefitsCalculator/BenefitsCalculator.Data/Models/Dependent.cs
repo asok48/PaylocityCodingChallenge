@@ -5,7 +5,7 @@ using System.Text;
 
 namespace BenefitsCalculator.Data
 {
-    public class Dependent
+    public class Dependent : BaseModel
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

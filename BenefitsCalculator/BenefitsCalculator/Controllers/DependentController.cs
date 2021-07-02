@@ -53,5 +53,16 @@ namespace BenefitsCalculator.Controllers
             }
             return Ok(dependent);
         }
+
+        [HttpPut]
+        [Route("updatedependent")]
+        public IActionResult UpdateDependent(Dependent dependent)
+        {
+            if (!dependentRepository.UpdateDependent(dependent))
+            {
+                return BadRequest("Error deleting dependent");
+            }
+            return Ok(dependent);
+        }
     }
 }

@@ -35,6 +35,20 @@ namespace BenefitsCalculator.Controllers
             return Ok(employeeRepository.GetFilteredEmployees(id, firstName, lastName));
         }
 
+        [HttpGet]
+        [Route("getemployee")]
+        public IActionResult GetEmployee(string employeeId)
+        {
+            var res = employeeRepository.GetEmployee(employeeId);
+            if (res == null)
+            {
+                return BadRequest("Cannot find employee");
+            } else
+            {
+                return Ok(res);
+            }
+        }
+
         [HttpPost]
         [Route("deleteemployee")]
         public IActionResult DeleteEmployee(Employee employee)
@@ -68,11 +82,18 @@ namespace BenefitsCalculator.Controllers
         }
 
         [HttpPut]
-        [Route("editemployee")]
-        public IActionResult EditEmployee(Employee employee)
+        [Route("updateemployee")]
+        public IActionResult UpdateEmployee(Employee employee)
         {
-            var res = employeeRepository.EditEmployee(employee);
-            return Ok(res);
+            var res = employeeRepository.UpdateEmployee(employee);
+            if (!res)
+            {
+                return BadRequest("Cannot find employee");
+            }
+            else
+            {
+                return Ok(res);
+            }
         }
     }
 }

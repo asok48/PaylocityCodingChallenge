@@ -9,5 +9,6 @@ namespace BenefitsCalculator.Data
         public bool AddDependent(Dependent dependent);
         public IEnumerable<Dependent> GetDependents(string employeeId);
         public bool DeleteDependent(Dependent dependent);
+        public bool UpdateDependent(Dependent dependent);
     }
 }

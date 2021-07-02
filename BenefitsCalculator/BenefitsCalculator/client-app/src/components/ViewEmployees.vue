@@ -98,17 +98,16 @@
             <tbody>
                 <tr>
                     <td scope="row">
-                        <input v-model="currentEmployee.employee.employeeId" class="form-control" placeholder="Employee ID" />
+                        <input v-model="currentEmployee.employee.employeeId" class="form-control" placeholder="Employee ID" disabled/>
                     </td>
                     <td>
-                        <input v-model="currentEmployee.employee.firstName" class="form-control" placeholder="First Name" />
+                        <input v-model="employeeEdit.firstName" class="form-control" placeholder="First Name" />
                     </td>
                     <td>
-                        <input v-model="currentEmployee.employee.lastName" class="form-control" placeholder="Last Name" />
+                        <input v-model="employeeEdit.lastName" class="form-control" placeholder="Last Name" />
                     </td>
                     <td>
-                        <button type="button" id="view-emp" class="btn btn-primary" v-on:click="viewEmployee(e, 'view')">Save</button>
-                        <button type="button" id="view-emp" class="btn btn-danger" v-on:click="viewEmployee(e, 'view')">Delete</button>
+                        <button type="button" id="view-emp" class="btn btn-primary" v-on:click="editEmployee()">Save</button>
                     </td>
                 </tr>
             </tbody>
@@ -131,7 +130,7 @@
                         <input v-model="d.lastName" class="form-control" placeholder="Last Name" />
                     </td>
                     <td>
-                        <button type="button" id="view-emp" class="btn btn-primary" v-on:click="addDependent(d)">Save</button>
+                        <button type="button" id="view-emp" class="btn btn-primary" v-on:click="editDependent(d)">Save</button>
                         <button type="button" id="view-emp" class="btn btn-danger" v-on:click="deleteDependent(d)">Delete</button>
                     </td>
                 </tr>
@@ -178,6 +177,10 @@
                     firstName: null,
                     lastName: null,
                 },
+                employeeEdit: {
+                    firstName: null,
+                    lastName: null
+                },
                 totalCost: null,
                 viewingEmployee: false,
                 editing: false
@@ -194,6 +197,8 @@
                         vm.employees = res.data
                         vm.currentEmployee.employee = null
                         vm.currentEmployee.dependents = null
+                        vm.employeeEdit.firstName = null
+                        vm.employeeEdit.lastName = null
                         vm.viewingEmployee = false
                         vm.editing = false
                         vm.totalCost = null
@@ -203,10 +208,13 @@
                 this.filter.id = ''
                 this.filter.firstName = ''
                 this.filter.lastName = ''
-                this.getEmployees();
+                this.filterEmployees()
             },
             viewEmployee: function (employee, type) {
                 this.currentEmployee.employee = employee
+                this.employeeEdit.firstName = this.currentEmployee.employee.firstName
+                this.employeeEdit.lastName = this.currentEmployee.employee.lastName
+
                 let vm = this
                 functions.getDependents(employee)
                 .then((response) => {
@@ -265,6 +273,38 @@
                 .catch((error) => {
                     alert("Error deleting dependent.")
                 })
+            },
+            editDependent: function (dependent) {
+                let vm = this
+                functions.editDependent(dependent.firstName, dependent.lastName, dependent.id)
+                    .then(() => {
+                        functions.getDependents(this.currentEmployee.employee)
+                            .then((response) => {
+                                vm.currentEmployee.dependents = response.data
+                                alert("Dependent Updated!")
+                            })
+                        
+                    })
+                    .catch(() => {
+                        alert("Error updating dependent.")
+                    })
+            },
+            editEmployee: function () {
+                let vm = this
+                functions.editEmployee(this.employeeEdit.firstName, this.employeeEdit.lastName, this.currentEmployee.employee.employeeId)
+                    .then(() => {
+                        functions.getEmployee(vm.currentEmployee.employee.employeeId)
+                            .then((response) => {
+                                vm.currentEmployee.employee = response.data
+                                vm.employees = vm.employees.filter(function (e) { return e.employeeId != vm.currentEmployee.employee.employeeId });
+                                vm.employees.push(vm.currentEmployee.employee)
+                                alert("Employee Updated!")
+                            })
+
+                    })
+                    .catch(() => {
+                        alert("Error updating employee.")
+                    })
             }
         }
     }

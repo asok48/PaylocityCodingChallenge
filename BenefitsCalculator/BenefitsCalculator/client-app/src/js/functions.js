@@ -8,7 +8,6 @@ function filterEmployees(firstName, lastName, id) {
             id: id
         }
     })
-    return res;
 }
 
 function getDependents (employee) {
@@ -50,11 +49,38 @@ function addEmployee(firstName, lastName, employeeId) {
     })
 }
 
+function editDependent(firstName, lastName, id) {
+    return axios.put('https://localhost:44360/Dependent/updatedependent', {
+        firstName: firstName,
+        lastName: lastName,
+        id: id
+    })
+}
+
+function getEmployee(employeeId) {
+    return axios.get('https://localhost:44360/Employee/getemployee', {
+        params: {
+            employeeId: employeeId
+        }
+    })
+}
+
+function editEmployee(firstName, lastName, employeeId) {
+    return axios.put('https://localhost:44360/Employee/updateemployee', {
+            firstName: firstName,
+            lastName: lastName,
+            employeeId: employeeId
+    })
+}
+
 export {
     filterEmployees,
+    getEmployee,
     getDependents,
     deleteEmployee,
     addDependent,
     deleteDependent,
-    addEmployee
+    addEmployee,
+    editDependent,
+    editEmployee
 }

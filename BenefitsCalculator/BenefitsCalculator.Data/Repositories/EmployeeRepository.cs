@@ -22,6 +22,11 @@ namespace BenefitsCalculator.Data
             return context.Employees.AsNoTracking().ToList();
         }
 
+        public Employee GetEmployee(string employeeId)
+        {
+            return context.Employees.FirstOrDefault(x => x.EmployeeId == employeeId);
+        }
+
         public bool AddEmployee(Employee employee)
         {
             if (context.Employees.Count(x => x.EmployeeId == employee.EmployeeId) > 0)
@@ -52,20 +57,7 @@ namespace BenefitsCalculator.Data
             }
             return res;
         }
-        public Employee EditEmployee(Employee employee)
-        {
-            var dbEmployee = context.Employees.FirstOrDefault(x => x.EmployeeId == employee.EmployeeId);
-            if (dbEmployee == null)
-            {
-                return null;
-            }
 
-            dbEmployee.FirstName = employee.FirstName;
-            dbEmployee.LastName = employee.LastName;
-
-            context.Update(dbEmployee);
-            return dbEmployee;
-        }
         public bool DeleteEmployee(Employee employee)
         {
             var dbEmployee = context.Employees.AsNoTracking().SingleOrDefault(x => x.EmployeeId == employee.EmployeeId);
@@ -75,6 +67,31 @@ namespace BenefitsCalculator.Data
             }
             context.Employees.Remove(employee);
             context.SaveChanges();
+            return true;
+        }
+
+        public bool UpdateEmployee(Employee employee)
+        {
+            var dbEmployee = context.Employees.FirstOrDefault(x => x.EmployeeId == employee.EmployeeId);
+
+            if (dbEmployee == null)
+            {
+                return false;
+            }
+
+            dbEmployee.FirstName = string.IsNullOrEmpty(employee.FirstName) ? dbEmployee.FirstName : employee.FirstName;
+            dbEmployee.LastName = string.IsNullOrEmpty(employee.LastName) ? dbEmployee.LastName : employee.LastName;
+            dbEmployee.Cost = dbEmployee.FirstName.ToLower().StartsWith("a") ? EMPLOYEE_COST * DISCOUNT : EMPLOYEE_COST;
+
+            try
+            {
+                context.Employees.Update(dbEmployee);
+                context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
             return true;
         }
     }
