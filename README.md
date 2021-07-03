@@ -16,3 +16,8 @@ in the client-app directory. This should install all necessary node packages for
 
 You may also need to set up the local database with the necessary tables. The BenefitsCalculator.SQLDatabase project should give the necessary scripts and tables needed to successfuly run the project. The Project is configured to use the '(localdb)\MSSQLLocalDB' local database. This configuration can be changed in the appsettings.json file.
 
+## Potential Future Additions
+ - User authenitication/login
+ - True SPA layout, with App.vue managing flow and state between pages/actions
+ - Proper pagination and/or table library integration
+ - Unit and load testing
