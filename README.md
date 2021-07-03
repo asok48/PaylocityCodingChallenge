@@ -11,7 +11,8 @@ Required to run:
   - C#/.NET Core 3.1
 
 After installation, run:
-  'npm run build'
+  'npm install'
 in the client-app directory. This should install all necessary node packages for the front end.
 
 You may also need to set up the local database with the necessary tables. The BenefitsCalculator.SQLDatabase project should give the necessary scripts and tables needed to successfuly run the project. The Project is configured to use the '(localdb)\MSSQLLocalDB' local database. This configuration can be changed in the appsettings.json file.
+
