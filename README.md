@@ -7,7 +7,7 @@ The Paylocity Benefits Calculator is a simple web application that allows users 
 Required to run:
   - NodeJs
   - VueJs
-  - SQL Server LocalDb
+  - MS SQL Server LocalDb
   - C#/.NET Core 3.1
 
 After installation, run:
