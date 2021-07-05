@@ -94,17 +94,19 @@ export default {
               alert("Error adding dependent.")
         })
     },
-    deleteDependent: function(dependent) {
-        let vm = this
-        let dep = dependent
-        functions.deleteDependent(this.employeeId, dependent.id)
-        .then(() => {
-            alert("Dependent Deleted!")
-            vm.dependents = vm.dependents.filter(function (d) { return d.id != dep.id });
-        })
-        .catch(() => {
-            alert("Error deleting dependent.")
-        })
+      deleteDependent: function (dependent) {
+        if (confirm('Are you sure you would like to delete this dependent?')) {
+            let vm = this
+            let dep = dependent
+            functions.deleteDependent(this.employeeId, dependent.id)
+            .then(() => {
+                alert("Dependent Deleted!")
+                vm.dependents = vm.dependents.filter(function (d) { return d.id != dep.id });
+            })
+            .catch(() => {
+                alert("Error deleting dependent.")
+            })
+        }
     },
     complete: function() {
         this.firstName = ""

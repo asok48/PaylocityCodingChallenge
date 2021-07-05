@@ -239,16 +239,18 @@
                 })
             },
             deleteEmployee: function (employee) {
-                let vm = this
                 //Add confirmation
-                functions.deleteEmployee(employee)
-                .then(() => {
-                    alert("Employee Deleted!")
-                    vm.filterEmployees()
-                })
-                .catch(() => {
-                    alert("Error deleting employee")
-                })
+                if (confirm("Are you sure you would like to delete this employee?")) {
+                    let vm = this
+                    functions.deleteEmployee(employee)
+                        .then(() => {
+                            alert("Employee Deleted!")
+                            vm.filterEmployees()
+                        })
+                        .catch(() => {
+                            alert("Error deleting employee")
+                        })
+                }
             },
             addDependent: function () {
                 let vm = this
@@ -264,15 +266,17 @@
                 })
             },
             deleteDependent: function (dependent) {
-                let vm = this
-                functions.deleteDependent(this.currentEmployee.employee.employeeId, dependent.id)
-                .then(() => {
-                    alert("Dependent Deleted!")
-                    vm.currentEmployee.dependents = vm.currentEmployee.dependents.filter(function (d) { return d.id != dependent.id });
-                })
-                .catch((error) => {
-                    alert("Error deleting dependent.")
-                })
+                if (confirm('Are you sure you would like to delete this dependent?')) {
+                    let vm = this
+                    functions.deleteDependent(this.currentEmployee.employee.employeeId, dependent.id)
+                        .then(() => {
+                            alert("Dependent Deleted!")
+                            vm.currentEmployee.dependents = vm.currentEmployee.dependents.filter(function (d) { return d.id != dependent.id });
+                        })
+                        .catch((error) => {
+                            alert("Error deleting dependent.")
+                        })
+                }
             },
             editDependent: function (dependent) {
                 let vm = this
