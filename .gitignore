@@ -8,9 +8,11 @@
 *.cache
 *.exe
 *.props
-*.json
 BenefitsCalculator/.vs/BenefitsCalculator/v16/.suo
 *.txt
 *.pdb
 *.dll
 *.v2
+BenefitsCalculator/BenefitsCalculator.Data/bin/Debug/netcoreapp3.1/BenefitsCalculator.Data.deps.json
+BenefitsCalculator/BenefitsCalculator.Data/obj/BenefitsCalculator.Data.csproj.nuget.dgspec.json
+BenefitsCalculator/BenefitsCalculator.Data/obj/project.assets.json
